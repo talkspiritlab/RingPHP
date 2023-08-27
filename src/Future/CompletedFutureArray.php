@@ -11,32 +11,33 @@ class CompletedFutureArray extends CompletedFutureValue implements FutureArrayIn
         parent::__construct($result);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset) : bool
     {
         return isset($this->result[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->result[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value) : void
     {
         $this->result[$offset] = $value;
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset) : void
     {
         unset($this->result[$offset]);
     }
 
-    public function count()
+    public function count() : int 
     {
         return count($this->result);
     }
 
-    public function getIterator()
+    public function getIterator() : \Iterator
     {
         return new \ArrayIterator($this->result);
     }
